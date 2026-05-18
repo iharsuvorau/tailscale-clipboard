@@ -1,0 +1,12 @@
+[Unit]
+Description=Tailscale clipboard server
+After=network.target tailscaled.service
+
+[Service]
+ExecStartPre=/usr/bin/tailscale serve --bg --set-path /clipboard 8765
+ExecStart=%h/.local/bin/clipboard-server -addr 127.0.0.1:8765 -prefix /clipboard
+ExecStopPost=/usr/bin/tailscale serve --https=443 /clipboard off
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
