@@ -26,7 +26,7 @@ func main() {
 	http.HandleFunc("/", handleIndex(p))
 	http.HandleFunc("/api/clipboard", handleClipboard)
 
-	log.Printf("Listening on %s with prefix %s", *addr, p)
+	log.Printf("listening on %s with prefix %s", *addr, p)
 	log.Fatal(http.ListenAndServe(*addr, nil))
 }
 
